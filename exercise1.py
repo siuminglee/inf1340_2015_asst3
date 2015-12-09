@@ -53,9 +53,11 @@ def selection(t, f):
     """
     # for each row in a table, return the row values when the function is satisfied
     # need to return as a table (list of lists)!
-    for row in t:
-        if f(row) == True:
-            return row
+    table = []
+    for i in t:
+        if f(i) == True:
+            table.append(i)
+    return table
 
 
 def projection(t, r):
