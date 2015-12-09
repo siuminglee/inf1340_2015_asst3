@@ -5,10 +5,9 @@
 This module performs table operations on database tables
 implemented as lists of lists. """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
-__copyright__ = "2015 Susan Sim"
-__license__ = "MIT License"
+__author__ = 'Rachel Lee'
+__email__ = "siuming.lee@mail.utoronto.ca"
+
 
 
 #####################
@@ -52,8 +51,10 @@ def selection(t, f):
     [["A", "B", "C"], [4, 5, 6]]
 
     """
-
-    return []
+    # for each row in a table, return the row values when the function is satisfied
+    for row in t:
+        if f(row) == True:
+            return row
 
 
 def projection(t, r):
