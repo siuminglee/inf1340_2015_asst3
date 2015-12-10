@@ -71,7 +71,16 @@ def projection(t, r):
     [["A", "C"], [1, 3], [4, 6]]
 
     """
-
+    index_list = []
+    final_table = []
+    for row in t:
+        for item in row:
+            if item == r[0]:
+                index_list.append(row.index(item))
+                r[0] = r[0+1]
+            else:
+                break
+        print index_list
     return []
 
 
