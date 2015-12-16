@@ -102,17 +102,16 @@ def cross_product(t1, t2):
     """
 # create a table
     combined_table = []
+
 # use first row from given tables to make headings in created table
     combined_table.append(t1[0] + t2[0])
-# got all values to mix and match, but need to not use headings rows
+
+# mix and match all values except for headings, add to created table
+
     for x in t1:
         for y in t2:
-            if t1[0] or t2[0]:
-                pass
-
-        else:
-            combined_table.append(x + y)
-
+            if x != t1[0] and y != t2[0]:
+                combined_table.append(x + y)
 
     return combined_table
 
