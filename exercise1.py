@@ -73,11 +73,11 @@ def projection(t, r):
     """
     index_list = []
     final_table = []
+
     for row in t:
         for item in row:
-            if item == r[0]:
+            if item in r:
                 index_list.append(row.index(item))
-                r[0] = r[0+1]
 
     return []
 
