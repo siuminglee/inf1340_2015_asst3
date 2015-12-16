@@ -74,12 +74,19 @@ def projection(t, r):
     index_list = []
     final_table = []
 
+# get a list of index numbers from attributes (r)
     for row in t:
         for item in row:
             if item in r:
                 index_list.append(row.index(item))
 
-    return []
+# compile table of rows (list of lists),
+# each row includes items at each index found above
+    for row in t:
+        for x in index_list:
+            final_table.append(row[x])
+
+    return final_table
 
 
 def cross_product(t1, t2):
