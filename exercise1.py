@@ -81,13 +81,13 @@ def projection(t, r):
                 index_list.append(row.index(item))
 
 # compile table of rows (list of lists),
-# each row includes items at each index found above
+# each row should include items found at each index gotten above
     for row in t:
         for x in index_list:
             final_table.append(row[x])
 
     return final_table
-
+# returns a list of the right items, but not in table format
 
 def cross_product(t1, t2):
     """
@@ -100,6 +100,15 @@ def cross_product(t1, t2):
 
 
     """
+# create a table
+    combined_table = []
+# use first row from given tables to make headings in created table
+    combined_table.append(t1[0] + t2[0])
+# got all values to mix and match, but need to not use headings rows
+    for x in t1:
+        for y in t2:
+            print [x + y]
 
+    print combined_table
     return []
 
