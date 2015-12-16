@@ -78,9 +78,7 @@ def projection(t, r):
             if item == r[0]:
                 index_list.append(row.index(item))
                 r[0] = r[0+1]
-            else:
-                break
-        print index_list
+
     return []
 
 
