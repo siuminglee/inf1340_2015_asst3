@@ -9,7 +9,6 @@ __author__ = 'Rachel Lee'
 __email__ = "siuming.lee@mail.utoronto.ca"
 
 
-
 #####################
 # HELPER FUNCTIONS ##
 #####################
@@ -55,7 +54,7 @@ def selection(t, f):
     # need to return as a table (list of lists)!
     table = []
     for i in t:
-        if f(i) == True:
+        if f(i) is True:
             table.append(i)
     return table
 
@@ -89,6 +88,7 @@ def projection(t, r):
     return final_table
 # returns a list of the right items, but not in table format
 
+
 def cross_product(t1, t2):
     """
     Return the cross-product of tables t1 and t2.
@@ -100,18 +100,13 @@ def cross_product(t1, t2):
 
 
     """
-# create a table
-    combined_table = []
+# create a table including headings composed of the first rows of given tables
+    combined_table = [t1[0] + t2[0]]
 
-# use first row from given tables to make headings in created table
-    combined_table.append(t1[0] + t2[0])
-
-# mix and match all values except for headings, add to created table
-
+    # mix and match all values except for headings and add to created table
     for x in t1:
         for y in t2:
             if x != t1[0] and y != t2[0]:
                 combined_table.append(x + y)
 
     return combined_table
-
