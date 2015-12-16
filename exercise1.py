@@ -107,8 +107,12 @@ def cross_product(t1, t2):
 # got all values to mix and match, but need to not use headings rows
     for x in t1:
         for y in t2:
-            print [x + y]
+            if t1[0] or t2[0]:
+                pass
 
-    print combined_table
-    return []
+        else:
+            combined_table.append(x + y)
+
+
+    return combined_table
 
