@@ -33,6 +33,13 @@ R2 = [["Department", "Head"],
       ["production", "Mori"],
       ["sales", "Brown"]]
 
+RNM = [["Sayings", "People"],
+       ["squanch", "Squanchy"],
+       ["wubalubadubdub", "Rick"],
+       ["ohjeez", "Morty"]]
+GAMES = [["Title", "Genre", "Time"],
+         ["Catan", "resource", "90"],
+         ["XCOM", "space", "150"]]
 
 #####################
 # HELPER FUNCTIONS ##
@@ -60,6 +67,8 @@ def filter_employees(row):
     return row[-2] >= 30 and row[-1] > 3500
 
 
+
+
 ###################
 # TEST FUNCTIONS ##
 ###################
@@ -76,6 +85,7 @@ def test_selection():
     assert is_equal(result, selection(EMPLOYEES, filter_employees))
 
 
+
 def test_projection():
     """
     Test projection operation.
@@ -89,6 +99,17 @@ def test_projection():
 
     assert is_equal(result, projection(EMPLOYEES, ["Surname", "FirstName"]))
 
+    result2 = [["Surname", "Age", "Salary"],
+             ["Smith", 25, 2000],
+             ["Black", 40, 3000],
+             ["Verdi", 36, 4500],
+             ["Smith", 40, 3900]]
+    assert is_equal(result2, projection(EMPLOYEES, ["Surname", "Age", "Salary"]))
+
+    result3 = [["Head"],
+             ["Mori"],
+             ["Brown"]]
+    assert is_equal(result3, projection(R2, ["Head"]))
 
 def test_cross_product():
     """
@@ -104,3 +125,12 @@ def test_cross_product():
               ["White", "production", "sales", "Brown"]]
 
     assert is_equal(result, cross_product(R1, R2))
+
+    result = [["Sayings", "People", "Title", "Genre", "Time"],
+              ["squanch", "Squanchy", "Catan", "resource", "90"],
+              ["squanch", "Squanchy", "XCOM", "space", "150"],
+              ["wubalubadubdub", "Rick", "Catan", "resource", "90"],
+              ["wubalubadubdub", "Rick", "XCOM", "space", "150"],
+              ["ohjeez", "Morty", "Catan", "resource", "90"],
+              ["ohjeez", "Morty", "XCOM", "space", "150"]]
+    assert is_equal(result, cross_product(RNM, GAMES))
