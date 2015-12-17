@@ -6,10 +6,9 @@ Computer-based immigration office for Kanadia
 
 """
 
-__author__ = 'Susan Sim'
-__email__ = "ses@drsusansim.org"
-__copyright__ = "2015 Susan Sim"
-__license__ = "MIT License"
+__author__ = 'Rachel Lee'
+__email__ = "siuming.lee@mail.utoronto.ca"
+
 
 import re
 import datetime
@@ -66,12 +65,25 @@ def decide(input_file, countries_file):
         "Accept", "Reject", and "Quarantine"
     """
 # call functions to check if person should be rejected
+
     complete_record()
+    valid_location()
+    needs_visa()
+    valid_passport_format()
+    valid_visa_format()
+    valid_date_format()
 
 # if an entry record is incomplete or has an invalid location, reject
     if complete_record() == "Reject":
         return ["Reject"]
     elif valid_location() == "Reject":
+        return ["Reject"]
+# if format of passport, visa or date is invalid, reject
+    elif valid_passport_format() == False:
+        return ["Reject"]
+    elif valid_visa_format() == False:
+        return ["Reject"]
+    elif valid_date_format() == False:
         return ["Reject"]
 # if someone is "visiting" from a country that requires a visitor's visa,
 # check for the visa, if older than two years, reject
@@ -108,12 +120,11 @@ def complete_record(passport, first_name, last_name, birth_date, city, region, c
         return "Maybe"
 
 
-def valid_location(city, region, country):
-    known_cities = ("bala", "weasel", "eureka", "desmond", "a")
-    known_regions = ("ON", "Rodent", "NU", "Ohio", "a")
+def valid_location(country):
+
     known_countries = ("KAN", "BRD", "JIK", "LUG")
 
-    if city.lower() in known_cities and region.lower() in known_regions.lower() and country.upper() in known_countries:
+    if country.upper() in known_countries:
         return "Maybe"
     else:
         return "Reject"
@@ -122,7 +133,7 @@ def accepted_home_country(home):
     if home.upper() is "KAN":
         return "Maybe"
 
-def needs_visa(entry_reason, visitor_visa_required):
+def needs_visa(entry_reason, visitor_visa_required, visa):
     if entry_reason == "visit" and visitor_visa_required == True:
         is_more_than_x_years_ago(2, visa)
 
@@ -136,7 +147,14 @@ def valid_passport_format(passport_number):
     :param passport_number: alpha-numeric string
     :return: Boolean; True if the format is valid, False otherwise
     """
-    return False
+# split passport number by "-" and count number of characters in each resulting block
+# if there are five blocks, and all equal to five, then is valid
+    sections = passport_number.split("-")
+    if len(sections[0]) == len(sections[1]) == len(sections[2]) == len(sections[3]) == len(sections[4]) == 5:
+        return True
+    else:
+        return False
+
 
 
 def valid_visa_format(visa_code):
@@ -146,7 +164,13 @@ def valid_visa_format(visa_code):
     :return: Boolean; True if the format is valid, False otherwise
 
     """
-
+# split visa code by "-" and count number of characters in resulting blocks
+# if there are two blocks, each with a length of 5, then is valid
+    visa_sections = visa_code.split("-")
+    if len(visa_sections[0]) = len(visa_sections[1]) = 5:
+        return True
+    else:
+        return False
 
 def valid_date_format(date_string):
     """
@@ -154,5 +178,9 @@ def valid_date_format(date_string):
     :param date_string: date to be checked
     :return: Boolean True if the format is valid, False otherwise
     """
+# split date string by "-", check three blocks,
+# length of first is 4, length of second and third are 2, all are numbers, then valid
+    date_sections = date_string.split("-")
+    if len(date_sections[0]) = 4 and len(date_sections[1]) = 2 and len(date_sections[2]) = 2:
 
     return False

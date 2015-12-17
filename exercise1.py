@@ -77,17 +77,20 @@ def projection(t, r):
     """
 # :param t: original table
 # :param r: an attribute (column) to sort the table by; can accept multiple
-# :return: the columns of the original table that match the attributes parameter
+# :return: the columns of the original table that match the attributes parameter,
+        # UnknownAttributesError if an attribute is not in the table
 
     index_list = []
     final_table = []
 
 # get a list of index numbers from attributes (r)
+# if r isn't in the original table, raise an error
     for row in t:
         for item in row:
             if item in r:
                 index_list.append(row.index(item))
-
+        if r != item:
+            raise UnknownAttributeException
 # compile table of rows (list of lists),
 # each row should include items found at each index gotten above
     for row in t:
