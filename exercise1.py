@@ -50,6 +50,11 @@ def selection(t, f):
     [["A", "B", "C"], [4, 5, 6]]
 
     """
+
+# :param t: table that function is to be performed on
+# :param f: function that will operate on the table
+# :return: a table that is the result of applying f to t
+
     # for each row in a table, return the row values when the function is satisfied
     # need to return as a table (list of lists)!
     table = []
@@ -70,6 +75,10 @@ def projection(t, r):
     [["A", "C"], [1, 3], [4, 6]]
 
     """
+# :param t: original table
+# :param r: an attribute (column) to sort the table by; can accept multiple
+# :return: the columns of the original table that match the attributes parameter
+
     index_list = []
     final_table = []
 
@@ -100,6 +109,11 @@ def cross_product(t1, t2):
 
 
     """
+
+# :param t1: original table 1
+# :param t2: original table 2
+# :return: table including all combinations of rows from table 1 and table 2
+
 # create a table including headings composed of the first rows of given tables
     combined_table = [t1[0] + t2[0]]
 

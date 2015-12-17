@@ -65,9 +65,70 @@ def decide(input_file, countries_file):
     :return: List of strings. Possible values of strings are:
         "Accept", "Reject", and "Quarantine"
     """
+# call functions to check if person should be rejected
+    complete_record()
 
-    return ["Reject"]
+# if an entry record is incomplete or has an invalid location, reject
+    if complete_record() == "Reject":
+        return ["Reject"]
+    elif valid_location() == "Reject":
+        return ["Reject"]
+# if someone is "visiting" from a country that requires a visitor's visa,
+# check for the visa, if older than two years, reject
+    elif needs_visa() == True:
+        return ["Reject"]
+# if any entrant that has not been rejected, is coming from
+# a country with a medical advisory, quarantine:
+    elif check_medical_advisory() == "Quarantine":
+        return ["Quarantine"]
+# if an entrant is not rejected or quarantined after the previous checks, accept
+    else:
+        return ["Accept"]
 
+
+# check if any required values in input_file are null
+def complete_record(passport, first_name, last_name, birth_date, city, region, country, entry_reason):
+    if passport is None:
+        return "Reject"
+    elif first_name is None:
+        return "Reject"
+    elif last_name is None:
+        return "Reject"
+    elif birth_date is None:
+        return "Reject"
+    elif city is None:
+        return "Reject"
+    elif region is None:
+        return "Reject"
+    elif country is None:
+        return "Reject"
+    elif entry_reason is None:
+        return "Reject"
+    else:
+        return "Maybe"
+
+
+def valid_location(city, region, country):
+    known_cities = ("bala", "weasel", "eureka", "desmond", "a")
+    known_regions = ("ON", "Rodent", "NU", "Ohio", "a")
+    known_countries = ("KAN", "BRD", "JIK", "LUG")
+
+    if city.lower() in known_cities and region.lower() in known_regions.lower() and country.upper() in known_countries:
+        return "Maybe"
+    else:
+        return "Reject"
+
+def accepted_home_country(home):
+    if home.upper() is "KAN":
+        return "Maybe"
+
+def needs_visa(entry_reason, visitor_visa_required):
+    if entry_reason == "visit" and visitor_visa_required == True:
+        is_more_than_x_years_ago(2, visa)
+
+def check_medical_advisory(medical_advisory):
+    if medical_advisory is not None:
+        return "Quarantine"
 
 def valid_passport_format(passport_number):
     """
